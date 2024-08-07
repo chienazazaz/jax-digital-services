@@ -33,7 +33,7 @@ jobs:
 
       - uses: google-github-actions/auth@v2
         with:
-          credentials_json: ${{ secrets.GCP_SA }}
+          credentials_json: ${{ secrets.GCP_SA_FILE }}
 
       - name: "Create env file"
         run: |
