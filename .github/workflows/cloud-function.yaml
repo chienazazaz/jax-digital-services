@@ -1,0 +1,60 @@
+name: Cloud Functions
+
+on:
+  push:
+    branches:
+      - master
+      - dev
+  workflow_dispatch:
+
+concurrency: ${{ github.ref }}
+
+env:
+  GCP_SA: ${{ secrets.GCP_SA }}
+  REGION: us-central1
+  ENV_FILE: env.yml
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version-file: ".nvmrc"
+
+      - run: npm install -g pnpm
+      - run: pnpm i --frozen-lockfile
+
+      - run: tsc --project tsconfig.build.json
+
+      - run: pnpm prune --prod
+
+      - uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.GCP_SA }}
+
+      - name: "Create env file"
+        run: |
+          echo "${{ secrets.ENV_FILE }}" > ${{ env.ENV_FILE }}
+          echo "PUBLIC_URL: 'https://${{ env.REGION }}-${{ secrets.GCP_PROJECT_ID }}.cloudfunctions.net/${{ github.event.repository.name }}-${{ github.ref_name }}'" >> env.yml
+
+      - run: |
+          cp package.json dist/package.json
+          cp pnpm-lock.yaml dist/pnpm-lock.yaml
+
+      - id: deploy
+        uses: "google-github-actions/deploy-cloud-functions@v1"
+        with:
+          name: ${{ github.event.repository.name }}-${{ github.ref_name }}
+          runtime: "nodejs18"
+          entry_point: main
+          source_dir: dist
+          region: us-central1
+          timeout: 540
+          memory_mb: 2048MB
+          https_trigger_security_level: security_level_unspecified
+          env_vars_file: ${{ env.ENV_FILE }}
+          service_account_email: ${{ env.GCP_SA }}
+          ingress_settings: ALLOW_ALL

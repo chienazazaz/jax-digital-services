@@ -1,0 +1,15 @@
+{
+    "extends": "@tsconfig/node18/tsconfig.json",
+    "include": ["./src/**/*"],
+    "compilerOptions": {
+      "outDir": "dist",
+      "sourceMap": true,
+      "lib": ["es2019", "DOM"],
+      "moduleResolution": "Node16",
+      "esModuleInterop": true,
+      "module": "Node16",
+      "resolveJsonModule": true,
+      "isolatedModules": true
+    }
+  }
+  
