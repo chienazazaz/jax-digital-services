@@ -13,7 +13,6 @@ app.use(express.json());
 
 app.use(({ url, params, body }, _, next) => {
   const log = { url, params, body };
-  // console.log(JSON.stringify(log));
   next();
 });
 

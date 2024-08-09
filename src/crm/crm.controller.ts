@@ -1,7 +1,7 @@
 import express from "express";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
-import Yup from "yup";
+import * as Yup from "yup";
 
 dayjs.extend(utc);
 
@@ -47,3 +47,5 @@ CRMController.use("/tasks", async (req, res) => {
     return res.status(500).json({ error });
   }
 });
+
+

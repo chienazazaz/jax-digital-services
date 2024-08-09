@@ -1,5 +1,5 @@
 import express from "express";
-import Yup from "yup";
+import * as Yup from "yup";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 
