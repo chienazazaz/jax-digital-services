@@ -2,7 +2,6 @@ name: Cloud Functions
 
 on:
   push:
-    branches:
   workflow_dispatch:
 
 concurrency: ${{ github.ref }}
