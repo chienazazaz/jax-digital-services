@@ -25,6 +25,14 @@ export const TABLES = {
   j_teacherqe_c_teachers_c: { date_field: "date_modified", id_field: "id" },
   j_teacherqe_j_class_c: { date_field: "date_modified", id_field: "id" },
   meetings: { date_field: "date_modified", id_field: "id" },
+  j_payment: { date_field: "date_modified", id_field: "id" },
+  j_paymentdetail: { date_field: "date_modified", id_field: "id" },
+  j_coursefee_j_payment_1_c: { date_field: "date_modified", id_field: "id" },
+  j_coursefee_j_class_1_c: { date_field: "date_modified", id_field: "id" },
+  j_coursefee_j_kindofcourse_1_c: { date_field: "date_modified", id_field: "id" },
+  j_coursefee_j_payment_2_c: { date_field: "date_modified", id_field: "id" },
+  j_payment_j_payment_1_c: { date_field: "date_modified", id_field: "id" },
+  j_payment_j_payment_2_c: { date_field: "date_modified", id_field: "id" },
 };
 
 export const CONNECTION = mysql.createConnection({
