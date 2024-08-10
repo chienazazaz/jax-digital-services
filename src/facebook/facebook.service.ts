@@ -51,7 +51,7 @@ export const uploadOfflineConversions = async ({ date }: { date: string }) => {
                     .digest("hex"),
                 ]
               : undefined;
-            
+
           return acc;
         },
         {}
@@ -106,7 +106,7 @@ export const uploadLeadFunnel = async ({
                         .digest("hex"),
                     ]
                   : undefined;
-                
+
               return acc;
             },
             {}
