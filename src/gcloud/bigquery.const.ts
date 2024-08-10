@@ -8,13 +8,13 @@ type UserDTO = {
     email?: string;
     last_name?: string,
     first_name?:string,
-    dob?:string,
+    dob?:{value:string},
     gender?: string;
 }
 
 type OfflineConversionDTO = {
   updated_at: string;
-    transaction_date: string;
+    transaction_date: {value:string};
     transaction_code: string;
     
     total: number;
@@ -31,8 +31,8 @@ const OfflineConversionQuery = (date: string) =>
 
 
 type LeadFunnelDTO = {
-    created_date: string;
-    conversion_date: string;
+    created_date: {value:string};
+    conversion_date: {value:string};
     status: string;
 } & UserDTO
 
