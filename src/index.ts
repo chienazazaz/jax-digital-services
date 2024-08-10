@@ -20,6 +20,6 @@ app.use("/facebook", FacebookController);
 app.use("/google-ads", GoogleAdsController);
 app.use("/crm", CRMController);
 
-// http("main", app);
+http("main", app);
 
-app.listen(8080, () => {})
+// app.listen(8080, () => {})
