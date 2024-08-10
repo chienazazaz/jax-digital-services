@@ -13,7 +13,7 @@ GoogleAdsController.use("/offline-conversion", async (req, res) => {
   }).validateSync(req.query);
   try {
     const result = await getOfflineConversions({ date });
-    return res.status(200).json({ result });
+    return res.status(200).attachment(`offline-conversion_${date}.csv`).send(result);
   } catch (error) {
     return res.status(500).json({ error });
   }
