@@ -4,30 +4,30 @@ export const queryBuilder = knex({ client: "mysql" });
 
 
 type UserDTO = {
-    contact_number?: string;
+    phone_mobile?: string;
     email?: string;
     last_name?: string,
     first_name?:string,
-    date_of_birth?:string,
+    dob?:string,
     gender?: string;
 }
 
 type OfflineConversionDTO = {
-    created_date: string;
+  updated_at: string;
     transaction_date: string;
     transaction_code: string;
     
     total: number;
-    branch_name: string;
+    center_name: string;
     lead_source: string;
   } & UserDTO ;
 
 const OfflineConversionQuery = (date: string) =>
   queryBuilder
-    .withSchema("dbt_prod_marketing")
+    .withSchema("prod_sales")
     .from("fct__conversions")
     .select()
-    .whereRaw("date(created_date) = ?", date);
+    .whereRaw("date(transaction_date) = ?", date);
 
 
 type LeadFunnelDTO = {
@@ -39,7 +39,7 @@ type LeadFunnelDTO = {
 
 const LeadFunnelQuery = (date: string, status: string) =>
   queryBuilder
-    .withSchema("dbt_prod_marketing")
+    .withSchema("prod_sales")
     .from("fct__lead_funnel")
     .select()
     .whereRaw("date(created_date) = ?", date)

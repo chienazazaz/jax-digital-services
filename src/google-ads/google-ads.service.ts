@@ -18,9 +18,9 @@ export const getOfflineConversions = async ({ date }: { date: string }) => {
           "Email": row.email
             ? Crypto.createHash("sha256").update(row.email).digest("hex")
             : "",
-          "Phone Number": row.contact_number
+          "Phone Number": row.phone_mobile
             ? Crypto.createHash("sha256")
-                .update(row.contact_number)
+                .update("+"+row.phone_mobile)
                 .digest("hex")
             : "",
           "Google Click ID": "",
@@ -50,9 +50,9 @@ export const getLeadFunnel = async ({
           "Email": row.email
             ? Crypto.createHash("sha256").update(row.email).digest("hex")
             : "",
-          "Phone Number": row.contact_number
+          "Phone Number": row.phone_mobile
             ? Crypto.createHash("sha256")
-                .update(row.contact_number)
+                .update("+"+row.phone_mobile)
                 .digest("hex")
             : "",
           "Google Click ID": "",

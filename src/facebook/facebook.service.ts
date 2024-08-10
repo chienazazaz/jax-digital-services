@@ -13,11 +13,11 @@ import {
 import { uploadEvents,UploadEvent } from "./facebook.const";
 
 const hashedUserData: Record<string, keyof UserDTO> = {
-  ph: "contact_number",
+  ph: "phone_mobile",
   em: "email",
   ln: "last_name",
   fn: "first_name",
-  db: "date_of_birth",
+  db: "dob",
   ge: "gender",
 };
 
@@ -49,7 +49,7 @@ export const uploadOfflineConversions = async ({ date }: { date: string }) => {
             currency: "VND",
             value: row.total,
             order_id: row.transaction_code,
-            branch_name: row.branch_name,
+            branch_name: row.center_name,
           },
         };
       });
@@ -81,7 +81,7 @@ export const uploadLeadFunnel = async ({
         return {
           event_name: "CompleteRegistration",
           event_time: dayjs(row.conversion_date).utcOffset(7).unix(),
-          event_id: `${row.contact_number || row.email}-${
+          event_id: `${row.phone_mobile || row.email}-${
             row.conversion_date
           }-${row.status}`,
           action_source: "physical_store",
@@ -100,7 +100,7 @@ export const uploadLeadFunnel = async ({
           ),
           custom_data: {
             currency: "VND",
-            order_id: `${row.contact_number || row.email}-${
+            order_id: `${row.phone_mobile || row.email}-${
               row.conversion_date
             }-${row.status}`,
             status: row.status,
