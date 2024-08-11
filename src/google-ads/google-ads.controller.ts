@@ -28,7 +28,7 @@ GoogleAdsController.use("/lead-funnel/:status", async (req, res) => {
   }).validateSync({ date: req.query.date, status: req.params.status });
   try {
     const result = await getLeadFunnel({ date,status });
-    return res.status(200).json({ result });
+    return res.status(200).attachment(`lead-funnel_${status}_${date}.csv`).send(result);
   } catch (error) {
     return res.status(500).json({ error });
   }
