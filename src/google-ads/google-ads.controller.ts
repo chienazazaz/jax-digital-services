@@ -25,7 +25,7 @@ GoogleAdsController.use("/lead-funnel", async (req, res) => {
       dayjs.utc().utcOffset(7).subtract(1, "day").format("YYYY-MM-DD")
     ),
     status: Yup.string().default("Converted"),
-  }).validateSync({ date: req.query, status: req.query});
+  }).validateSync(req.query);
   try {
     const result = await getLeadFunnel({ date,status });
     return res.status(200).attachment(`lead-funnel_${status}_${date}.csv`).send(result);
