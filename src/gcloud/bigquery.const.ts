@@ -31,7 +31,6 @@ const OfflineConversionQuery = (date: string) =>
 
 
 type LeadFunnelDTO = {
-    created_date: {value:string};
     conversion_date: {value:string};
     status: string;
 } & UserDTO
@@ -42,7 +41,7 @@ const LeadFunnelQuery = (date: string, status: string) =>
     .withSchema("prod_sales")
     .from("fct__lead_funnel")
     .select()
-    .whereRaw("date(created_date) = ?", date)
+    .whereRaw("conversion_date = ?", date)
     .where("status", "=", status);
 
 

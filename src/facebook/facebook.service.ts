@@ -34,7 +34,7 @@ export const uploadOfflineConversions = async ({ date }: { date: string }) => {
       event_name: "Purchase",
       event_time: dayjs(row.transaction_date.value).utcOffset(7).unix(),
       event_id: row.transaction_code,
-      action_source: row.lead_source as any,
+      action_source: 'physical_store',
       user_data: Object.entries(hashedUserData).reduce(
         (acc: Record<string, any>, [key, value]) => {
           acc[key] =
@@ -89,7 +89,7 @@ export const uploadLeadFunnel = async ({
           event_id: `${row.phone_mobile || row.email}-${row.conversion_date}-${
             row.status
           }`,
-          action_source: "physical_store",
+          action_source: "phone_call",
           user_data: Object.entries(hashedUserData).reduce(
             (acc: Record<string, any>, [key, value]) => {
               acc[key] =
