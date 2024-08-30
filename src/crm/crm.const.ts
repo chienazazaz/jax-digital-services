@@ -33,6 +33,7 @@ export const TABLES = {
   j_coursefee_j_payment_2_c: { date_field: "date_modified", id_field: "id" },
   j_payment_j_payment_1_c: { date_field: "date_modified", id_field: "id" },
   j_payment_j_payment_2_c: { date_field: "date_modified", id_field: "id" },
+  calls: { date_field: "date_modified", id_field: "id" },
 };
 
 export const CONNECTION = mysql.createConnection({
